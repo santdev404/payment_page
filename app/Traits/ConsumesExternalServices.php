@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Appp\Traits;
+namespace App\Traits;
 
 use GuzzleHttp\Client;
 
