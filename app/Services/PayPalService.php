@@ -80,6 +80,8 @@ class PayPalService
 
     public function createOrder($value, $currency)
     {
+        $factor = $this->resolverFactor($currency);
+
         return $this->makeRequest(
             'POST',
             '/v2/checkout/orders',
@@ -90,7 +92,7 @@ class PayPalService
                     0 => [
                         'amount' => [
                             'currency_code' => strtoupper($currency),
-                            'value' => $value
+                            'value' => round($value * $factor) / $factor
                         ]
                     ],
                 ],
@@ -122,6 +124,16 @@ class PayPalService
         );
     }
 
-    
+    public function resolverFactor($currency)
+    {
+        $zerdDeciamlCurrencies = ['JPY'];
+
+        if(in_array(strtoupper($currency), $zerdDeciamlCurrencies))
+        {
+            return 1;
+        }
+
+        return 100;
+    }
 
 }
