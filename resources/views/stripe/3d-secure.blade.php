@@ -9,6 +9,7 @@
 
                 <div class="card-body">
          
+                    
 
                     {{ __('Complete the required steps!') }}
                 </div>
